@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" id="main-html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عسل النحل الطبيعي - Honey Pro & Sweet</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-yellow: #FFD700;
+            --primary-black: #1A1A1A;
+            --accent-amber: #FFA500;
+            --light-yellow: #FFF8DC;
+            --neutral-gray: #F5F5DC;
+            --dark-text: #2c2c2c;
+            --light-bg: #FFFEF7;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: var(--dark-text);
+            overflow-x: hidden;
+            transition: all 0.3s ease;
+        }
+
+        /* Translation Button */
+        .translate-btn {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: linear-gradient(135deg, var(--primary-yellow) 0%, var(--accent-amber) 100%);
+            color: var(--primary-black);
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 14px;
+            cursor: pointer;
+            z-index: 1001;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .translate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        .translate-btn.loading {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        /* Language specific styling */
+        .lang-en {
+            font-family: 'Arial', sans-serif;
+            direction: ltr;
+        }
+
+        .lang-en .translate-btn {
+            left: 20px;
+            right: auto;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary-black) 0%, var(--primary-yellow) 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-yellow);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-yellow);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-black) 0%, var(--accent-amber) 100%);
+            color: white;
+            padding: 8rem 2rem 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="honeycomb" width="100" height="100" patternUnits="userSpaceOnUse"><polygon points="25,15 75,15 100,50 75,85 25,85 0,50" fill="none" stroke="rgba(255,215,0,0.1)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23honeycomb)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: var(--primary-yellow);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--primary-yellow);
+            color: var(--primary-black);
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        /* Section Styling */
+        section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--primary-black);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--primary-yellow);
+            border-radius: 2px;
+        }
+
+        /* About Section */
+        .about {
+            background: var(--light-bg);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .about-image {
+            position: relative;
+            text-align: center;
+        }
+
+        .brand-showcase {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transform: rotate(-5deg);
+            transition: transform 0.3s ease;
+        }
+
+        .brand-showcase:hover {
+            transform: rotate(0deg);
+        }
+
+        .logo-container {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(135deg, var(--light-yellow) 0%, var(--neutral-gray) 100%);
+            border-radius: 20px;
+            margin: 1rem auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 3px dashed var(--accent-amber);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 15px;
+        }
+
+        .logo-placeholder {
+            text-align: center;
+            color: var(--accent-amber);
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        .brand-names {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .brand-names span {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .honey-pro {
+            color: var(--primary-black);
+        }
+
+        .sweet {
+            color: var(--accent-amber);
+        }
+
+        .logo-display {
+            font-size: 3rem;
+            color: var(--accent-amber);
+            margin: 1rem 0;
+        }
+
+        /* Products Section */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 3px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-black), var(--primary-yellow), var(--accent-amber));
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-yellow);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, var(--light-yellow) 0%, var(--neutral-gray) 100%);
+            border-radius: 15px;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            border: 2px dashed var(--accent-amber);
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 15px;
+        }
+
+        .image-placeholder {
+            text-align: center;
+            color: var(--accent-amber);
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        .product-card h3 {
+            color: var(--primary-black);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--primary-yellow);
+            color: var(--primary-black);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .product-features {
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        .product-features li {
+            padding: 0.5rem 0;
+            padding-right: 1.5rem;
+            position: relative;
+        }
+
+        .product-features li::before {
+            content: '🍯';
+            position: absolute;
+            right: 0;
+            top: 0.5rem;
+        }
+
+        .lang-en .product-features li {
+            padding-left: 1.5rem;
+            padding-right: 0;
+        }
+
+        .lang-en .product-features li::before {
+            left: 0;
+            right: auto;
+        }
+
+        .lang-en .product-badge {
+            left: 15px;
+            right: auto;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: linear-gradient(135deg, var(--primary-black) 0%, var(--accent-amber) 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .contact-item {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .contact-item:hover {
+            transform: scale(1.05);
+            border-color: var(--primary-yellow);
+            background: rgba(255,255,255,0.15);
+        }
+
+        .contact-item h3 {
+            color: var(--primary-yellow);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .social-link:hover {
+            background: var(--primary-yellow);
+            color: var(--primary-black);
+            transform: scale(1.1);
+            border-color: white;
+        }
+
+        .social-link.instagram:hover {
+            background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
+            color: white;
+        }
+
+        .social-link.facebook:hover {
+            background: #1877f2;
+            color: white;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-black);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        /* Testimonial */
+        .testimonial {
+            background: rgba(255,255,255,0.95);
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .testimonial::before {
+            content: '"';
+            font-size: 4rem;
+            color: var(--accent-amber);
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            opacity: 0.3;
+        }
+
+        .lang-en .testimonial::before {
+            left: 20px;
+            right: auto;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            color: var(--dark-text);
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-author {
+            color: var(--accent-amber);
+            font-weight: bold;
+        }
+
+        .stats-container {
+            display: flex;
+            justify-content: space-around;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary-yellow);
+            display: block;
+        }
+
+        .stat-label {
+            color: white;
+            opacity: 0.9;
+        }
+
+        .guarantee-badge, .urgency-timer {
+            margin: 0.5rem 0;
+            padding: 0.5rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+
+        .guarantee-badge {
+            background: rgba(46, 204, 113, 0.1);
+            color: #27ae60;
+            border: 1px solid #27ae60;
+        }
+
+        .urgency-timer {
+            background: rgba(231, 76, 60, 0.1);
+            color: #e74c3c;
+            border: 1px solid #e74c3c;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .translate-btn {
+                top: 80px;
+                right: 10px;
+                padding: 10px 15px;
+                font-size: 12px;
+            }
+
+            .lang-en .translate-btn {
+                left: 10px;
+                right: auto;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        /* Hidden content */
+        .hidden {
+            display: none;
+        }
+
+        /* Floating animation for bees */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        .floating-bee {
+            position: absolute;
+            font-size: 2rem;
+            animation: float 4s ease-in-out infinite;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+    <!-- Translation Button -->
+    <button class="translate-btn" onclick="toggleLanguage()">
+        <span id="translate-icon">🌐</span>
+        <span id="translate-text">English</span>
+    </button>
+
+    <!-- Arabic Content -->
+    <div id="arabic-content">
+        <header>
+            <nav>
+                 <img src="logoo.jpg" alt="تربة Logo" style="height: 50px;">
+                <div class="logo">🍯 عسل النحل</div>
+                <ul class="nav-links">
+
+                    <li><a href="#home">الرئيسية</a></li>
+                    <li><a href="#about">من نحن</a></li>
+                    <li><a href="#products">منتجاتنا</a></li>
+                    <li><a href="#contact">اتصل بنا</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <section id="home" class="hero">
+            <div class="floating-bee" style="top: 20%; right: 10%;">🐝</div>
+            <div class="floating-bee" style="top: 60%; left: 15%; animation-delay: -2s;">🐝</div>
+            <div class="floating-bee" style="top: 30%; left: 80%; animation-delay: -4s;">🐝</div>
+            
+            <div class="hero-content fade-in">
+
+                <h1>🍯 عسل النحل الطبيعي</h1>
+                                <img src="logoo.jpg" alt="تربة Logo" style="height: 200px;">
+
+                <p>🐝 ودّع المبيدات، واحمِ نحلك بطريقة طبيعية</p>
+                <a href="#products" class="cta-button">اكتشف منتجاتنا</a>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <div class="section-title fade-in">من نحن</div>
+            <div class="about-content">
+                <div class="about-text fade-in">
+                    <p>Enactus Esprit ICT هي منظمة طلابية يقودها شباب شغوفون بالابتكار، والتأثير الاجتماعي، وريادة الأعمال. نحن جزء من شبكة Enactus العالمية، ونعمل على تطوير مشاريع مستدامة تهدف إلى مواجهة التحديات الحقيقية في مجتمعاتنا. من خلال العمل الجماعي، والإبداع، والالتزام بالتغيير الإيجابي، نُسهم في تمكين الجيل القادم من القادة لصناعة عالمٍ أفضل وأكثر شمولاً من خلال العمل الريادي.</p>
+                </div>
+                
+            </div>
+        </section>
+
+        <section id="products">
+            <div class="section-title fade-in">منتجاتنا</div>
+            <div class="products-grid">
+              
+                
+                <div class="product-card fade-in">
+                    <div class="product-badge">جديد</div>
+                    <div class="product-image">
+                        <div class="image-placeholder">
+                            <div>🍯</div>
+                            <small>Bee wax</small>
+                        </div>
+                    </div>
+                    <h3>شمع العسل Scobee</h3>
+                    <p>شمع Scobee هو شمع أساس مصمم خصيصًا لمكافحة طفيل الفاروا.</p>
+                    <ul class="product-features">
+                        <li>تُكوّن هذه الزيوت مناخًا صعب التأقلم لعيش وتكاثر طفيل الفاروا داخل الخلية.</li>
+                        <li>يساهم في منع تكاثر وانتقال الفاروا بين النحل.</li>
+                        <li>يتم استخدام تركيز مدروس بعناية من الزيوت لضمان:</li>
+                        <li>استمرار نشاط وعمل النحل بشكل طبيعي.</li>
+                        <li>إنتاج الملكة دون التأثير على وظائفها.</li>
+                        <li>عدم ظهور أي أعراض جانبية على مستعمرة النحل.</li>
+                    </ul>
+                    <div class="guarantee-badge">✅ شهادة جودة معتمدة</div>
+                    <div class="urgency-timer">🔥 كمية محدودة - اطلب الآن</div>
+                </div>
+
+                <div class="product-card fade-in">
+                    <div class="product-badge">مميز</div>
+                    <div class="product-image">
+                        <div class="image-placeholder">
+                            <div>🐝</div>
+                            <small>>بخاخ Scobee X-Varroa</small>
+                        </div>
+                    </div>
+                    <h3>بخاخ Scobee X-Varroa</h3>
+                    <p>بخاخ Scobee X-Varroa هو منتوج طبيعي فعال لمكافحة طفيل الفاروا.</p>
+                    <ul class="product-features">
+                        <li>يحتوي على مجموعة من الزيوت الطبيعية المركزة ذات خصائص مضادة للفاروا.</li>
+                        <li>يعمل على تشكيل وسط غير مناسب لبقاء وتكاثر الفاروا داخل الخلية.</li>
+                        <li>تساهم هذه الزيوت في تنقية بيت النحل من هجمات الفاروا.</li>
+                        <li>لا يسبب أي تعكير أو تأثير سلبي على نشاط وعمل النحل.</li>
+                    </ul>
+                    <div class="guarantee-badge">✅ شهادة جودة معتمدة
+</div>
+                    <div class="urgency-timer">💎 عرض خاص - شحن مجاني</div>
+                </div>
+            </div>
+
+            <div class="testimonial fade-in">
+                <p class="testimonial-text">عسل طبيعي رائع الطعم وعالي الجودة! أستخدمه لعائلتي منذ أشهر والنتائج مذهلة. أنصح الجميع بتجربة هذا العسل المميز.</p>
+                <p class="testimonial-author">- فاطمة أحمد، أم لثلاثة أطفال</p>
+            </div>
+        </section>
+
+        <section id="contact" class="contact">
+            <div class="section-title" style="color: var(--primary-yellow);">اتصل بنا</div>
+            
+            <div class="stats-container fade-in">
+                <div class="stat-item">
+                    <span class="stat-number">10000+</span>
+                    <span class="stat-label">عميل راضٍ</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">99%</span>
+                    <span class="stat-label">معدل الرضا</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">24/7</span>
+                    <span class="stat-label">خدمة العملاء</span>
+                </div>
+            </div>
+
+            <div class="contact-info fade-in">
+                <div class="contact-item">
+                    <h3>📧 البريد الإلكتروني</h3>
+                    <p>sco-bee@outlook.com
+</p>
+                </div>
+                
+                <div class="contact-item">
+                    <h3>📱 الهاتف</h3>
+                    <p>179 221 99 +216</p>
+                </div>
+                
+                <div class="contact-item">
+                    <h3>📍 العنوان</h3>
+                    <p>Z.I. Chotrana II BP 160 Pôle Technologique, El Ghazela, Ariana 2083</p>
+                    <p>المكتب الرئيسي</p>
+                </div>
+
+                <div class="contact-item">
+                    <h3>🌐 تابعنا على</h3>
+                    <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                        <span style="font-size: 1.2rem;">📘</span>
+                        <span style="font-weight: bold;">scobee_tn</span>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2024 عسل النحل الطبيعي by Honey Pro & Sweet</p>
+        </footer>
+    </div>
+
+    <!-- English Content -->
+    <div id="english-content" class="hidden">
+        <header>
+            <nav>
+                <div class="logo">🍯 Natural Honey</div>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#products">Our Products</a></li>
+                    <li><a href="#contact">Contact Us</a></li>
+                </ul>
+            </nav>
+        </header>
+        <section id="home" class="hero lang-en">
+            <div class="floating-bee" style="top: 20%; right: 10%;">🐝</div>
+            <div class="floating-bee" style="top: 60%; left: 15%; animation-delay: -2s;">🐝</div>
+            <div class="floating-bee" style="top: 30%; left: 80%; animation-delay: -4s;">🐝</div>
+            
+            <div class="hero-content fade-in">
+                <h1>🍯 Natural Honey</h1>
+                <p>We offer the finest natural honey and pure bee products sourced from the best local apiaries. 100% natural honey without additives or preservatives, rich in vitamins and minerals for better health for you and your family.</p>
+                <a href="#products" class="cta-button">Discover Our Products</a>
+            </div>
+        </section>
+        <section id="about" class="about lang-en">
+            <div class="section-title fade-in">About Us</div>
+            <div class="about-content">
+                <div class="about-text
+    fade-in">
+                        <p>We are a leading company in the production and marketing of natural honey and high-quality bee products, working with the best local apiaries to ensure the finest products.</p>
+                        <p>With our extensive experience and partnership with specialized beekeepers, we offer pure natural products that maintain nutritional value and authentic taste.</p>
+                        <p>Our vision is to promote the culture of consuming natural honey and provide healthy products that contribute to improving quality of life.</p>
+                </div>
+                <div class="about-image fade-in">
+                    <div class="brand-show
+case">
+                        <div class="brand-names">
+                            <span class="honey-pro">Honey Pro</span>
+                            <span>&</span>
+                            <span class="sweet">Sweet</span>
+                        </div>
+                        <div class="logo-container">
+                            <div class="logo-placeholder">
+                                <div class="logo-display">🍯</div>
+                                <small>Product Logo</small>
+                            </div>
+                        </div>
+                        <p style="color: var(--accent-amber); font-weight: bold; margin-top: 1rem;">
+                            Pure Natural Honey
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="products">
+            <div class="section-title fade-in">Our Products</div>
+            <div class="products-grid">
+                <div class="product-card fade-in">
+                    <div class="product-badge">Best Seller</div>
+                    <div class="product-image">
+                        <div class="image-placeholder">
+                            <div>🍯</div>
+                            <small>Natural Flower Honey - 1 kg</small>
+                        </div>
+                    </div>
+                    <h3>Natural Flower Honey - 1 kg</h3>
+                    <p>Pure natural honey from various flowers for a rich and beneficial taste</p>
+                    <ul class="product-fe
+atures">
+                        <li>100% natural honey without additives</li>
+                        <li>Rich in vitamins and minerals</li>
+                        <li>Boosts immunity</li>
+                        <li>Delicious and distinctive natural taste</li>
+                        <li>Packaged in a healthy and safe manner</li>
+                    </ul>
+                    <div class="guarantee-badge">🛡️ Quality Guarantee or Money Back</div
+                        >
+                    <div class="urgency-timer">⏰ Limited Offer - 20% Off</div>
+                </div>
+                <div class="product-card fade-in">
+                    <div class="product-badge">New</div>
+                    <div class="product-image">
+                        <div class="image-placeholder">
+                            <div>🍯</div>
+                            <small>Premium Sidr Honey - 500 g</small>
+                        </div>
+                    </div>
+                    <h3>Premium Sidr Honey - 500 g</h3>
+                    <p>The finest honey from rare Sidr trees</p>
+                    <ul class="product-fe
+atures">
+                        <li>Premium Sidr honey</li>
+                        <li>Unique therapeutic properties</li>
+                        <li>Distinctive taste and golden color</li>
+                        <li>Beneficial for the digestive system</li>
+                        <li>Limited and exclusive production</li>
+                    </ul>
+                    <div class="guarantee-badge">✅ Certified Quality</div>
+                    <div class="urgency-timer">🔥 Limited Quantity - Order Now</div
+                            
+                        </div>
+                <div class="product-card fade-in">
+                    <div class="product-badge">Featured</div>
+                    <div class="product-image">
+                        <div class="image-placeholder">
+                            <div>🐝</div>
+                            <small>Royal Jelly - 100 g</small>
+                        </div>
+                    </div>
+                    <h3>Royal Jelly - 100 g</h3>
+                    <p>Natural royal jelly for health and vitality</p>
+                    <ul class="product-fe
+atures">
+                        <li>Pure royal jelly</li>
+                        <li>Rich in proteins and amino acids</li>
+                        <li>Boosts energy and vitality</li>
+                        <li>Beneficial for memory enhancement</li>
+                        <li>Suitable for all ages</li>
+                    </ul>
+                    <div class="guarantee-badge">✅ Certified Quality</div>
+                    <div class="urgency-timer">🔥 Limited Quantity - Order Now</div>
+                </div>
+            </div>
+        </section>
+        <footer>
+            <div class="footer-content">
+                <p>&copy; 2023 Scobee. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+    <script>
+        // Language toggle functionality
+        function toggleLanguage() {
+            const arabicContent = document.getElementById('arabic-content');
+            const englishContent = document.getElementById('english-content');
+            const translateBtn = document.querySelector('.translate-btn');
+            const translateIcon = document.getElementById('translate-icon');
+            const translateText = document.getElementById('translate-text');
+
+            if (arabicContent.classList.contains('hidden')) {
+                arabicContent.classList.remove('hidden');
+                englishContent.classList.add('hidden');
+                translateIcon.textContent = '🌐';
+                translateText.textContent = 'English';
+                translateBtn.classList.remove('loading');
+            } else {
+                arabicContent.classList.add('hidden');
+                englishContent.classList.remove('hidden');
+                translateIcon.textContent = '🌐';
+                translateText.textContent = 'العربية';
+                translateBtn.classList.add('loading');
+            }
+        }
+        // Initial setup
+        document.addEventListener('DOMContentLoaded', () => {
+            const arabicContent = document.getElementById('arabic-content');
+            const englishContent = document.getElementById('english-content');
+
+            // Show Arabic content by default
+            arabicContent.classList.remove('hidden');
+            englishContent.classList.add('hidden');
+        });
+    </script>
+    <style>
+        /* Global Styles */
+        :root {
+            --primary-black: #1a1a1a;
+            --primary-yellow: #f9d423;
+            --accent-amber: #ffb300;
+            --light-bg: #f5f5f5;
+            --dark-text: #333333;
+            --neutral-gray: #cccccc;
+            --light-yellow: #fff9c4;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--light-bg);
+            color: var(--dark-text);
+        }
+
+        header {
+            background-color: var(--primary-black);
+            color: white;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-links {
+            list-style-type: none;
+            display: flex;
+            gap: 1.5rem;
+        }
+        .nav-links li {
+            display: inline;
+        }
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        .nav-links a:hover {
+            color: var(--primary-yellow);
+        }
+        .hero {
+            background: linear-gradient(135deg, var(--primary-black) 0%, var(--primary-yellow) 100%);
+            color: white;
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .cta-button {
+            background: var(--primary-yellow);
+            color: var(--primary-black);
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
